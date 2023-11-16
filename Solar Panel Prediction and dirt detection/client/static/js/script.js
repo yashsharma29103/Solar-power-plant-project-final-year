@@ -193,3 +193,4 @@ function initDropAreaHighlightOnDrag() {
         dropArea.classList.remove('highlight');
     });
 }
+

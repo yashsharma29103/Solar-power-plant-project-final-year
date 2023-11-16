@@ -10,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 
 <body>
@@ -54,6 +55,150 @@
         </div>
     </nav>
 
+    <br><br><br>
+
+    <div class="app" id="app2">
+        <h1>Solar Power Prediction</h1>
+        <form id="form2" action='http://127.0.0.1:5000/predict_power' method='post' name="form2" class="form"
+            enctype="multipart/form-data">
+            <div class="wrapper rounded bg-white">
+                <div class="form">
+                    <div class="row">
+                        <div class=" my-md-2 my-3">
+                            <label>Location</label>
+                            <select class="sub" name="location" required>
+                                <option value="" selected hidden>Choose Option</option>
+                                <option value="Grissom">Grissom</option>
+                                <option value="Camp Murray">Camp Murray</option>
+                                <option value="Hill Weber">Hill Weber</option>
+                                <option value="JDMT">JDMT</option>
+                                <option value="Kahului">Kahului</option>
+                                <option value="MNANG">MNANG</option>
+                                <option value="Malmstrom">Malmstrom</option>
+                                <option value="March AFB">March AFB</option>
+                                <option value="Offutt">Offutt</option>
+                                <option value="Peterson">Peterson</option>
+                                <option value="Travis">Travis</option>
+                                <option value="USAFA">USAFA</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mt-md-0 mt-3">
+                            <label>Date (mm/dd/yyyy)</label>
+                            <input type="date" name="date" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mt-md-0 mt-3">
+                            <label>Time(hh:mm am/pm)</label>
+                            <input type="time" name="time" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mt-md-0 mt-3">
+                            <label>Latitude (degrees)</label>
+                            <input type="number" name="latitude" step=0.01 class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mt-md-0 mt-3">
+                            <label>Longitude (degrees)</label>
+                            <input type="number" name="longitude" step=0.01 class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mt-md-0 mt-3">
+                            <label>Altitude (metres)</label>
+                            <input type="number" name="altitude" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class=" my-md-2 my-3">
+                            <label>Season</label>
+                            <select class="sub" name="season" required>
+                                <option value="" selected hidden>Choose Option</option>
+                                <option value="Fall">Fall</option>
+                                <option value="Spring">Spring</option>
+                                <option value="Summer">Summer</option>
+                                <option value="Winter">Winter</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mt-md-0 mt-3">
+                            <label>Specific Humidity</label>
+                            <input type="number" step="any" name="humidity" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mt-md-0 mt-3">
+                            <label>Ambient Temperature (deg farenheit)</label>
+                            <input type="number" step="any" name="amb_temp" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mt-md-0 mt-3">
+                            <label>Wind Speed (knots)</label>
+                            <input type="number" step=0.1 name="wind speed" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mt-md-0 mt-3">
+                            <label>Visibility (relative to sunny day which is 10 (1-10))</label>
+                            <input type="number" step=1 name="visibility" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mt-md-0 mt-3">
+                            <label>Pressure (millibars of mercury))</label>
+                            <input type="number" step=0.1 name="pressure" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mt-md-0 mt-3">
+                            <label>Cloud Ceiling (metres)</label>
+                            <input type="number" step=1 name="cloud ceiling" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="btn btn-primary mt-3"><button type="submit">Submit</button></div>
+                    <div class="row">
+                        <div class="col-md-6 mt-md-0 mt-3">
+                            <div id="result2">
+                                {% if res %}
+                                <span>The predicted power is </span>
+                                {{ res }}
+                                <span>killo watts</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    {% if formdata %}
+    <script>
+        document.getElementsByName('location')[0].value = "{{ formdata['location'] }}"
+        document.getElementsByName('season')[0].value = "{{ formdata['season'] }}"
+        document.getElementsByName('latitude')[0].value = "{{ formdata['latitude'] }}"
+        document.getElementsByName('longitude')[0].value = "{{ formdata['longitude'] }}"
+        document.getElementsByName('humidity')[0].value = "{{ formdata['humidity'] }}"
+        document.getElementsByName('visibility')[0].value = "{{ formdata['visibility'] }}"
+        document.getElementsByName('pressure')[0].value = "{{ formdata['pressure'] }}"
+        document.getElementsByName('time')[0].value = "{{ formdata['time'] }}"
+        document.getElementsByName('date')[0].value = "{{ formdata['date'] }}"
+        document.getElementsByName('wind speed')[0].value = "{{ formdata['wind speed'] }}"
+        document.getElementsByName('altitude')[0].value = "{{ formdata['altitude'] }}"
+        document.getElementsByName('cloud ceiling')[0].value = "{{ formdata['cloud ceiling'] }}"
+        document.getElementsByName('amb_temp')[0].value = "{{ formdata['amb_temp'] }}"
+
+    </script>
+    {% endif %}
+
+    <br><br><br>
+
     <div class="app" id="app">
         <h1>Dirt Detection</h1>
         <div id="dropArea">
@@ -61,8 +206,7 @@
                 <p>
                     Drop file here<br><span class="bold">or</span>
                 </p>
-                <input id="img_uploaded" name="file" type="file"
-                    accept="image/webp, image/jpeg, image/png, image/jpg">
+                <input id="img_uploaded" name="file" type="file" accept="image/webp, image/jpeg, image/png, image/jpg">
                 <span class="bold">and</span>
                 <button id="upload" type="submit" disabled>Upload</button>
             </form>
@@ -84,7 +228,7 @@
         <div id="result"></div>
     </div>
 
-
+    <br><br><br>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

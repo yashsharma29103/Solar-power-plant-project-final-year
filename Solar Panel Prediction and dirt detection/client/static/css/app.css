@@ -1,3 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    background: radial-gradient(
+        100% 400% at 100% 50%,
+        #ddd 0%,
+        rgb(0, 68, 170) 50%,
+        rgb(0, 35, 162) 100%
+    ) right 0% / 400% 100% no-repeat;
+    min-width: 100vh;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
 .carousel{
     height: 500px;
     width: 100vw;
@@ -28,14 +53,12 @@
     text-align: center;
 }
 
-body {
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-    background: radial-gradient(
-        100% 400% at 100% 50%,
-        #ddd 0%,
-        rgb(0, 68, 170) 50%,
-        rgb(0, 35, 162) 100%
-    ) right 0% / 400% 100% no-repeat;
+.wrapper {
+    max-width: 90%;
+    margin: 80px;
+    padding: 30px 45px;
+    box-shadow: 5px 25px 35px #3535356b;
+    border-radius: 15px;
 }
 
 .app ul {
@@ -78,7 +101,7 @@ progress {
     border-color: #007aff;
 }
 
-#app {
+#app, #app2 {
     background: radial-gradient(
         100% 400% at 100% 50%,
         rgb(255, 199, 0) 0%,
@@ -87,8 +110,11 @@ progress {
     ) right 0% / 400% 100% no-repeat;
     padding: 20px 30px;
     border-radius: 15px;
-    width: 620px;
+    width: 80vw;
     margin: 0 auto;
+}
+
+#app{
     text-align: center;
 }
 
@@ -98,6 +124,7 @@ progress {
     border: 2px dashed transparent;
     background: #fff;
     border-radius: 15px;
+    box-shadow: 5px 25px 35px #3535356b;
     width: 500px;
     padding: 20px 20px 30px;
 
