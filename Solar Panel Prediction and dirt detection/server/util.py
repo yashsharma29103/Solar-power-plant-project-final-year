@@ -7,6 +7,7 @@ from werkzeug.utils import redirect, secure_filename
 from tensorflow.keras.models import load_model
 import imageio as iio
 import numpy as np
+import pickle
 
 def save_file(file):
     path = os.getcwd()
@@ -46,3 +47,16 @@ def dirt_detect(file):
     print(response)
     
     return response
+
+def begin_model2():
+    model = load_model('../model/pred_model.h5', compile=False)
+    model.compile()
+    return model
+
+def predict(X_test):
+    model = begin_model2()
+    with open('../model/sc.pkl','rb') as f:
+        sc = pickle.load(f)
+    X_test_scaled = sc.transform(X_test)
+    res = model.predict(X_test_scaled)
+    return res
